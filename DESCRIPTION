@@ -1,7 +1,7 @@
 Package: qrlabelr
 Type: Package
 Title: Generate Machine- And Human-Readable Plot Labels for Experiments
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person("Alexander", "Wireko Kena", email = "alex.kena24@gmail.com", 
          role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3385-4945")),
          person("Ebenezer", "Ogoe", email = "ebenezerogoe@gmail.com", role = c("aut")),
@@ -37,7 +37,7 @@ Depends: R (>= 4.1.0), shinyBS (>= 0.61.1)
 Config/testthat/edition: 3
 Language: en-US
 NeedsCompilation: no
-Packaged: 2023-10-12 21:14:24 UTC; awkena
+Packaged: 2023-10-26 11:18:23 UTC; awkena
 Author: Alexander Wireko Kena [aut, cre]
     (<https://orcid.org/0000-0003-3385-4945>),
   Ebenezer Ogoe [aut],
@@ -51,4 +51,4 @@ Author: Alexander Wireko Kena [aut, cre]
   Feed The Future Innovation Lab for Crop Improvement [fnd],
   Project Artemis [fnd]
 Repository: CRAN
-Date/Publication: 2023-10-13 12:50:14 UTC
+Date/Publication: 2023-10-26 11:40:02 UTC

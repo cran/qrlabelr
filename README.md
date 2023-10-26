@@ -10,6 +10,9 @@
 [![R-CMD-check](https://github.com/awkena/qrlabelr/actions/workflows/OScheck.yml/badge.svg)](https://github.com/awkena/qrlabelr/actions/workflows/OScheck.yml)
 [![test-coverage](https://github.com/awkena/qrlabelr/actions/workflows/codecov3.yml/badge.svg)](https://github.com/awkena/qrlabelr/actions/workflows/codecov3.yml)
 [![Codecov test coverage](https://codecov.io/gh/awkena/qrlabelr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/awkena/qrlabelr?branch=main)
+[![](https://www.r-pkg.org/badges/version/qrlabelr?color=orange)](https://cran.r-project.org/package=qrlabelr)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/qrlabelr?color=blue)](https://cran.r-project.org/package=qrlabelr)
+[![CRAN checks](https://badges.cranchecks.info/summary/qrlabelr.svg)](https://cran.r-project.org/web/checks/check_results_qrlabelr.html)
 <!-- badges: end -->
 
 # Create Plot Labels Easily With qrlabelr
@@ -242,6 +245,8 @@ field_label(dat = qrlabelr::square_lattice,
             Year = 2023, 
             family = 'sans', 
             rounded = TRUE, 
+            rect = TRUE,
+            print_across = TRUE,
             IBlock = TRUE,
             get_unique_id = "ruid", 
             rname = "AW Kena", 
@@ -275,6 +280,10 @@ The example above creates labels with QR codes generated using the reproducible 
 
 The arguments `Trial = 'PYT'` and `Year = 2023` are required if the method for generating unique IDs for QR codes is set to `get_unique_id = "ruid"`.  Users can set the font size for the label using the `font_sz` argument. Rectangular labels with rounded corners are generated with the argument `rounded = TRUE`, else set it to `rounded = FALSE`. 
 
+Users have the option to draw rectangles around labels or make labels without rectangular borders via the `rect = TRUE` argument. Set this argument to `TRUE` for rectangles or `FALSE` for no rectangles. 
+
+The `print_across` argument provides options for users to fill pages with labels by row (left to right) or by column (top to down). Set to `TRUE` to fill pages by row or `FALSE` to fill pages by column.
+
 The following arguments must also be specified if the input field book was not generated with the 'FielDHub' package:  
 
 - `rep_id`: column id in input field book for **REP**; default is 'REP'  
@@ -304,6 +313,8 @@ gp_label(dat = qrlabelr::square_lattice,
          get_unique_id = "uuid",
          font_sz = 10,
          family = "sans",
+         rect = TRUE,
+         print_across = FALSE,
          filename = paste0(tempfile()),
          top_left_txt1 = 'Plot:',
          top_left_txt2 = 'Row:', 
@@ -345,6 +356,8 @@ gp_label_portrait(
   right_mar = 0.625,
   numrow = 8L,
   numcol = 3L,
+  rect = TRUE,
+  print_across = FALSE,
   filename = paste0(tempfile()),
   font_sz = 10,
   family = 'sans', 
