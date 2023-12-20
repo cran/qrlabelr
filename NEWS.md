@@ -1,6 +1,16 @@
+# qrlabelr 0.2.0
+This is a minor release. The following changes were made since the release of version 0.1.1:
+* Added 'BrAPI'-compliance features to the 'shiny' app. This implies that users can now query or access data directly from 'BMS' and 'breedbase' databases via the 'QBMS' package.
+* Redesigned the 'Import fieldbook' tab in the 'shiny' app to reflect these new features.
+* Added the 'QBMS' package to the Imports field in the DESCRIPTION file.
+* Updated the NAMESPACE accordingly.
+* Fixed a mislabeled object bug in the general-purpose landscape text label option in the 'shiny' app.
+* Updated the roles of three persons in the package DESCRIPTION file to author status from contributor status.
+
 # qrlabelr 0.1.1
 This is a patch release. The following patches have been made to 'qrlabelr' since the release of version 0.1.0:
 * Fixed a font size bug in Treetag label option in 'shiny' app.
+* Fixed a bug in the general-purpose label option in 'shiny' app.
 * Added a new argument to the `create_label()` and `gp_label_portrait()` functions to allow users to fill multi-row and column pages with labels horizontally (left to right ) or vertically (top to bottom).
 * Added a new argument to the `create_label()` and `gp_label_portrait()` functions to allow users the option to draw rectangles around labels or make labels without rectangular borders.
 * Simplified the 'shiny' app by disabling subset functionality on the 'Generate labels' tab.

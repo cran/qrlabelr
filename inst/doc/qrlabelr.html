@@ -447,19 +447,28 @@ must also be updated before installing qrlabelr from GitHub</strong></p>
 <h2>Generating field books</h2>
 <p>To use qrlabelr, one must first generate a field book or data input
 that shows individual experimental plot or label attributes. <strong>A
-field or study book is required as an input data input in
-qrlabelr.</strong></p>
+field or study book is required as an input data input in qrlabelr for
+plot labels. For seed packet labels, a data input containing the
+attributes of the seed samples must be provided</strong>.</p>
 <p>Typically, layout information for field plots are obtained based on
 the experimental design and treatment randomization. For field plot
 labels, it is strongly recommended to have the grid coordinates of plots
 (row and column numbers of plots) included in the field book.</p>
 <p>There are free open-source software such as <a href="https://github.com/DidierMurilloF/FielDHub">FielDHub</a>, which
 users can use to easily generate an input field book for plot label
-design in qrlabelr. Other user-preferred software such as BMS can
-equally be used to generate an input field book if desired.</p>
+design in qrlabelr. Other user-preferred software such as ‘BMS’ or
+‘breedbase’ can equally be used to generate an input field book if
+desired. <em>The qrlabelr package is ‘BrAPI- compliant’</em>.</p>
+<p>In R, users can use available functions in the <a href="https://icarda-git.github.io/QBMS/index.html">‘QBMS’</a> package
+to query ‘BrAPI’-supported databases for input field books. A
+user-friendly UI component for accessing data from ‘BrAPI’-supported
+databases is available in the ‘shiny’ app.</p>
+<p>For BrAPI compliance, users must install the <a href="https://github.com/gaborcsardi/async">‘async’</a> package in
+addition to the ‘QBMS’ package as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;r-lib/async&quot;</span>)</span></code></pre></div>
 <p><strong>Input data must be imported as a data frame into qrlabelr for
 use. We recommend that users save input data as csv or as xls or xlsx
-files for easy import to qrlabelr</strong></p>
+files for easy import to qrlabelr</strong>.</p>
 </div>
 <div id="plot-label-design-options" class="section level2">
 <h2>Plot label design options</h2>
@@ -611,33 +620,33 @@ defined by the user using specific arguments.</p>
 <p>For instance, to create field plot labels based on the <a href="https://www.avery.com/blank/labels/94241">Avery 94241
 template</a>, the <code>field_label()</code> function is used as shown
 in the code snippet below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(qrlabelr)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">field_label</span>(<span class="at">dat =</span> qrlabelr<span class="sc">::</span>square_lattice,</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>            <span class="at">wdt =</span> <span class="dv">5</span>, </span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>            <span class="at">hgt =</span> <span class="dv">2</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>            <span class="at">page_wdt =</span> <span class="fl">8.5</span>, </span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>            <span class="at">page_hgt =</span> <span class="dv">11</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>            <span class="at">top_mar =</span> <span class="fl">0.75</span>, </span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>            <span class="at">bot_mar =</span> <span class="fl">0.75</span>, </span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>            <span class="at">left_mar =</span> <span class="fl">1.75</span>, </span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>            <span class="at">right_mar =</span> <span class="fl">1.75</span>, </span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>            <span class="at">numrow =</span> <span class="dv">4</span><span class="dt">L</span>, </span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>            <span class="at">numcol =</span> <span class="dv">1</span><span class="dt">L</span>, </span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>            <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>            <span class="at">print_across =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()), </span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>            <span class="at">font_sz =</span> <span class="dv">20</span>, </span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>            <span class="at">Trial =</span> <span class="st">&#39;PYT&#39;</span>, </span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>            <span class="at">Year =</span> <span class="dv">2023</span>, </span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">&#39;sans&#39;</span>, </span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>            <span class="at">rounded =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>            <span class="at">IBlock =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>            <span class="at">get_unique_id =</span> <span class="st">&quot;ruid&quot;</span>, </span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>            <span class="at">rname =</span> <span class="st">&quot;AW Kena&quot;</span>, </span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>            <span class="at">seed_source =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>            <span class="at">seed_source_id =</span> <span class="st">&quot;SEED_SOURCE&quot;</span> </span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>            )</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(qrlabelr)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">field_label</span>(<span class="at">dat =</span> qrlabelr<span class="sc">::</span>square_lattice,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>            <span class="at">wdt =</span> <span class="dv">5</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>            <span class="at">hgt =</span> <span class="dv">2</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>            <span class="at">page_wdt =</span> <span class="fl">8.5</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>            <span class="at">page_hgt =</span> <span class="dv">11</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>            <span class="at">top_mar =</span> <span class="fl">0.75</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>            <span class="at">bot_mar =</span> <span class="fl">0.75</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>            <span class="at">left_mar =</span> <span class="fl">1.75</span>, </span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>            <span class="at">right_mar =</span> <span class="fl">1.75</span>, </span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>            <span class="at">numrow =</span> <span class="dv">4</span><span class="dt">L</span>, </span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>            <span class="at">numcol =</span> <span class="dv">1</span><span class="dt">L</span>, </span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>            <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>            <span class="at">print_across =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()), </span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>            <span class="at">font_sz =</span> <span class="dv">20</span>, </span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>            <span class="at">Trial =</span> <span class="st">&#39;PYT&#39;</span>, </span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>            <span class="at">Year =</span> <span class="dv">2023</span>, </span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">&#39;sans&#39;</span>, </span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>            <span class="at">rounded =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>            <span class="at">IBlock =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>            <span class="at">get_unique_id =</span> <span class="st">&quot;ruid&quot;</span>, </span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>            <span class="at">rname =</span> <span class="st">&quot;AW Kena&quot;</span>, </span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>            <span class="at">seed_source =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>            <span class="at">seed_source_id =</span> <span class="st">&quot;SEED_SOURCE&quot;</span> </span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>            )</span></code></pre></div>
 <p>The above example creates field plot labels using a sample field book
 named <code>square_lattice</code> generated with the FielDHub package.
 The <code>square_lattice</code> sample field book is available in the
@@ -726,30 +735,30 @@ and orientation on the label.</p>
 <p>To create any general-purpose label with a landscape text
 orientation, invoke the <code>gp_label()</code> function as has been
 done in the code snippet below:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">gp_label</span>(<span class="at">dat =</span> qrlabelr<span class="sc">::</span>square_lattice,</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>         <span class="at">get_unique_id =</span> <span class="st">&quot;uuid&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>         <span class="at">font_sz =</span> <span class="dv">10</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>         <span class="at">family =</span> <span class="st">&quot;sans&quot;</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>         <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>         <span class="at">print_across =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>         <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()),</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>         <span class="at">top_left_txt1 =</span> <span class="st">&#39;Plot:&#39;</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>         <span class="at">top_left_txt2 =</span> <span class="st">&#39;Row:&#39;</span>, </span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>         <span class="at">top_right_txt1 =</span> <span class="st">&#39;Rep:&#39;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>         <span class="at">top_right_txt2 =</span> <span class="st">&#39;Col:&#39;</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>         <span class="at">center_right_txt1 =</span> <span class="st">&#39;iBlock:&#39;</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>         <span class="at">center_right_txt2 =</span> <span class="st">&#39;Seed:&#39;</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>         <span class="at">center_right_txt3 =</span> <span class="st">&#39;Adepa&#39;</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>         <span class="at">bottom_left_txt1 =</span> <span class="st">&#39;Loc:&#39;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>         <span class="at">top_left_id1 =</span> <span class="st">&#39;PLOT&#39;</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>         <span class="at">top_left_id2 =</span> <span class="st">&#39;ROW&#39;</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>         <span class="at">top_right_id1 =</span> <span class="st">&#39;REP&#39;</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>         <span class="at">top_right_id2 =</span> <span class="st">&#39;COLUMN&#39;</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>         <span class="at">center_right_id1 =</span> <span class="st">&#39;IBLOCK&#39;</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>         <span class="at">center_right_id2 =</span> <span class="st">&#39;SEED_SOURCE&#39;</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>         <span class="at">bottom_left_id1 =</span> <span class="st">&#39;LOCATION&#39;</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>         <span class="at">bottom_left_id2 =</span> <span class="st">&#39;TREATMENT&#39;</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">gp_label</span>(<span class="at">dat =</span> qrlabelr<span class="sc">::</span>square_lattice,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>         <span class="at">get_unique_id =</span> <span class="st">&quot;uuid&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>         <span class="at">font_sz =</span> <span class="dv">10</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>         <span class="at">family =</span> <span class="st">&quot;sans&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>         <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>         <span class="at">print_across =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>         <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()),</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>         <span class="at">top_left_txt1 =</span> <span class="st">&#39;Plot:&#39;</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>         <span class="at">top_left_txt2 =</span> <span class="st">&#39;Row:&#39;</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>         <span class="at">top_right_txt1 =</span> <span class="st">&#39;Rep:&#39;</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>         <span class="at">top_right_txt2 =</span> <span class="st">&#39;Col:&#39;</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>         <span class="at">center_right_txt1 =</span> <span class="st">&#39;iBlock:&#39;</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>         <span class="at">center_right_txt2 =</span> <span class="st">&#39;Seed:&#39;</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>         <span class="at">center_right_txt3 =</span> <span class="st">&#39;Adepa&#39;</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>         <span class="at">bottom_left_txt1 =</span> <span class="st">&#39;Loc:&#39;</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>         <span class="at">top_left_id1 =</span> <span class="st">&#39;PLOT&#39;</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>         <span class="at">top_left_id2 =</span> <span class="st">&#39;ROW&#39;</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>         <span class="at">top_right_id1 =</span> <span class="st">&#39;REP&#39;</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>         <span class="at">top_right_id2 =</span> <span class="st">&#39;COLUMN&#39;</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>         <span class="at">center_right_id1 =</span> <span class="st">&#39;IBLOCK&#39;</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>         <span class="at">center_right_id2 =</span> <span class="st">&#39;SEED_SOURCE&#39;</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>         <span class="at">bottom_left_id1 =</span> <span class="st">&#39;LOCATION&#39;</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>         <span class="at">bottom_left_id2 =</span> <span class="st">&#39;TREATMENT&#39;</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>)</span></code></pre></div>
 <p>The above arguments are passed to the <code>create_label()</code>
 function to generate the desired labels based on the defined page
 setting and label dimension parameters.</p>
@@ -758,53 +767,53 @@ standalone function that places human-readable text items on the label
 in a portrait orientation as shown in Figure 2. The code snippet below
 demonstrates how to use the <code>gp_label_portrait()</code> function in
 R.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(qrlabelr)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> qrlabelr<span class="sc">::</span>square_lattice</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>dat<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">paste0</span>(dat<span class="sc">$</span>LOCATION,<span class="st">&#39;2023&#39;</span>, <span class="st">&#39;_PYT&#39;</span>, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>PLOT, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>ROW, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>COLUMN)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a> </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">gp_label_portrait</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  dat,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  <span class="at">wdt =</span> <span class="dv">2</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="at">hgt =</span> <span class="dv">1</span>, </span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="at">page_wdt =</span> <span class="fl">8.5</span>, </span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="at">page_hgt =</span> <span class="dv">11</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>  <span class="at">top_mar =</span> <span class="fl">0.625</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  <span class="at">bot_mar =</span> <span class="fl">0.625</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  <span class="at">left_mar =</span> <span class="fl">0.625</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  <span class="at">right_mar =</span> <span class="fl">0.625</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  <span class="at">numrow =</span> <span class="dv">8</span><span class="dt">L</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  <span class="at">numcol =</span> <span class="dv">3</span><span class="dt">L</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()),,</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="at">font_sz =</span> <span class="dv">10</span>,</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&#39;sans&#39;</span>, </span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  <span class="at">rounded =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  <span class="at">print_across =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>  <span class="at">bot_txt1 =</span> <span class="st">&#39;Rubi&#39;</span>, </span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>  <span class="at">cent_txt2 =</span> <span class="st">&#39;Rep:&#39;</span>,  </span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>  <span class="at">cent_txt3 =</span> <span class="st">&#39;R:&#39;</span>, </span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>  <span class="at">cent_txt4 =</span> <span class="st">&#39;r:&#39;</span>, </span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>  <span class="at">top_txt1 =</span> <span class="st">&#39;P:&#39;</span>, </span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>  <span class="at">top_txt2 =</span> <span class="st">&#39;B:&#39;</span>,</span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>  <span class="at">bot_txt2_id =</span> <span class="st">&#39;ids&#39;</span>,</span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>  <span class="at">bot_txt3_id =</span> <span class="st">&#39;LOCATION&#39;</span>,</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>  <span class="at">cent_txt1_id =</span> <span class="st">&#39;TREATMENT&#39;</span>, </span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>  <span class="at">cent_txt2_id =</span> <span class="st">&#39;REP&#39;</span>, </span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>  <span class="at">cent_txt3_id =</span> <span class="st">&#39;COLUMN&#39;</span>, </span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>  <span class="at">cent_txt4_id =</span> <span class="st">&#39;ROW&#39;</span>, </span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>  <span class="at">top_txt1_id =</span> <span class="st">&#39;PLOT&#39;</span>,</span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>  <span class="at">top_txt2_id =</span> <span class="st">&#39;IBLOCK&#39;</span>,</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>  <span class="at">top_txt3_id =</span> <span class="st">&#39;SEED_SOURCE&#39;</span>,</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>  <span class="at">unique_id =</span> <span class="st">&#39;ids&#39;</span>,</span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>  <span class="at">ec_level =</span> <span class="dv">1</span></span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(qrlabelr)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> qrlabelr<span class="sc">::</span>square_lattice</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>dat<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">paste0</span>(dat<span class="sc">$</span>LOCATION,<span class="st">&#39;2023&#39;</span>, <span class="st">&#39;_PYT&#39;</span>, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>PLOT, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>ROW, <span class="st">&#39;_&#39;</span>, dat<span class="sc">$</span>COLUMN)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a> </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">gp_label_portrait</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  dat,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="at">wdt =</span> <span class="dv">2</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="at">hgt =</span> <span class="dv">1</span>, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="at">page_wdt =</span> <span class="fl">8.5</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="at">page_hgt =</span> <span class="dv">11</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="at">top_mar =</span> <span class="fl">0.625</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="at">bot_mar =</span> <span class="fl">0.625</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="at">left_mar =</span> <span class="fl">0.625</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="at">right_mar =</span> <span class="fl">0.625</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="at">numrow =</span> <span class="dv">8</span><span class="dt">L</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="at">numcol =</span> <span class="dv">3</span><span class="dt">L</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="fu">tempfile</span>()),,</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="at">font_sz =</span> <span class="dv">10</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&#39;sans&#39;</span>, </span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="at">rounded =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  <span class="at">rect =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>  <span class="at">print_across =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>  <span class="at">bot_txt1 =</span> <span class="st">&#39;Rubi&#39;</span>, </span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>  <span class="at">cent_txt2 =</span> <span class="st">&#39;Rep:&#39;</span>,  </span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>  <span class="at">cent_txt3 =</span> <span class="st">&#39;R:&#39;</span>, </span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>  <span class="at">cent_txt4 =</span> <span class="st">&#39;r:&#39;</span>, </span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>  <span class="at">top_txt1 =</span> <span class="st">&#39;P:&#39;</span>, </span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>  <span class="at">top_txt2 =</span> <span class="st">&#39;B:&#39;</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>  <span class="at">bot_txt2_id =</span> <span class="st">&#39;ids&#39;</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>  <span class="at">bot_txt3_id =</span> <span class="st">&#39;LOCATION&#39;</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>  <span class="at">cent_txt1_id =</span> <span class="st">&#39;TREATMENT&#39;</span>, </span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>  <span class="at">cent_txt2_id =</span> <span class="st">&#39;REP&#39;</span>, </span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>  <span class="at">cent_txt3_id =</span> <span class="st">&#39;COLUMN&#39;</span>, </span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>  <span class="at">cent_txt4_id =</span> <span class="st">&#39;ROW&#39;</span>, </span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>  <span class="at">top_txt1_id =</span> <span class="st">&#39;PLOT&#39;</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>  <span class="at">top_txt2_id =</span> <span class="st">&#39;IBLOCK&#39;</span>,</span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>  <span class="at">top_txt3_id =</span> <span class="st">&#39;SEED_SOURCE&#39;</span>,</span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>  <span class="at">unique_id =</span> <span class="st">&#39;ids&#39;</span>,</span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>  <span class="at">ec_level =</span> <span class="dv">1</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>)</span></code></pre></div>
 <p>To view details of the <code>field_label()</code>, the
 <code>gp_label()</code>, and <code>gp_label_portrait()</code> functions
 in ‘RStudio’, run the following codes in the R console:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>field_label</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>gp_label</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>gp_label_portrait</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>field_label</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>gp_label</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>?qrlabelr<span class="sc">::</span>gp_label_portrait</span></code></pre></div>
 <p><strong>Note that the default label template for the above functions
 is <a href="https://www.avery.com/blank/labels/94220">Avery 94220
 template</a>.</strong>.</p>
@@ -814,7 +823,7 @@ template</a>.</strong>.</p>
 <p>To create your first plot label using the ‘shiny’ app, you will need
 to open the ‘EasyQrlabelr’ ‘shiny’ app. You can do this by entering the
 following command in the console:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>qrlabelr<span class="sc">::</span><span class="fu">run_app</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>qrlabelr<span class="sc">::</span><span class="fu">run_app</span>()</span></code></pre></div>
 <p>This will open a new window in your default web browser that displays
 the ‘EasyQrlabelr’ ‘shiny’ app. The user is then greeted with a Welcome
 page that provides an overview of the web app, some quick instructions
@@ -839,15 +848,28 @@ and their corresponding features.</p>
 <div id="import-field-book-tab" class="section level3">
 <h3>Import field book tab</h3>
 <p>To create plot labels, start by clicking on the “Import field book”
-sidebar menu. This presents a page with a number of input widgets all
-geared towards the upload of a field book. Click the “Browse…” button
-and navigate to a desired field book in CSV, XLS, or XLSX format. If the
-field book was generated with FielDHub or BMS, turn on the “Generated
-with FielDHub” or Generated with BMS switch respectively. These switches
-allow users to automatically populate relevant input widgets fields that
-will be covered in subsequent sections. However, users should turn off
-these switches if the imported field book was generated using other
+sidebar menu.</p>
+<p>Users can upload input field books from a local source on their
+computer or by querying BrAPI supported breeding databases. The current
+supported databases are <em>‘BMS’</em> and <em>‘breedbase’</em>.</p>
+<p>Clicking on this tab presents a page with a number of input widgets
+all geared towards the upload of a field book.</p>
+<p>To upload data from a local source, turn on the switch for ‘From
+local source’ and then click the “Browse…” button and navigate to a
+desired field book in CSV, XLS, or XLSX format. If the field book was
+generated with FielDHub, turn on the “From FielDHub” switch. This switch
+allows users to automatically populate relevant input widgets fields
+that will be covered in subsequent sections. However, users should turn
+off this switch if the imported field book was generated using other
 programs.</p>
+<p>To access data directly from ‘BrAPI’-supported breeding databases
+such as ‘BMS’ or ‘breedbase’, turn on the switch for ‘From BrAPI
+databases’ and proceed to fill out the log-in page for the database.
+After a successful sign-in, select crop to GET all programs under the
+crop. Select the specific program to GET all trials for the program.
+Select a specific trial to GET all studies. Select a specific
+study/environment to GET data or study book for import into the ‘shiny’
+app.</p>
 <p>To preview the uploaded field book right in the app, turn on the
 switch labeled “Preview Field book”. This displays the uploaded field
 book in a dedicated card from which the field book can be examined, but
